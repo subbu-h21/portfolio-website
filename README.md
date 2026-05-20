@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Subramanya Hegde — Portfolio
+
+Personal portfolio website built with Next.js 14, TypeScript, Tailwind CSS, and Framer Motion.
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS + shadcn/ui
+- **Animation**: Framer Motion
+- **Fonts**: Syne (headings), DM Sans (body), DM Mono (code)
+- **Contact**: Resend API
+- **Deployment**: Vercel
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local — add your RESEND_API_KEY
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create `.env.local` (copy from `.env.example`):
 
-## Learn More
+```env
+RESEND_API_KEY=re_xxxxxxxxxxxx   # Get from resend.com (free tier: 3000/month)
+CONTACT_EMAIL=subramanyah65@gmail.com
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy to Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Push to GitHub
+2. Import repo at [vercel.com/new](https://vercel.com/new)
+3. Add env vars in Vercel → Settings → Environment Variables
+4. Deploy — done
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Files to Replace
 
-## Deploy on Vercel
+| File | Action |
+|------|--------|
+| `public/resume.pdf` | Replace with your actual resume PDF |
+| Project links in `lib/data.ts` | Fill in `github` and `demo` URLs for each project |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Customization
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All content lives in **`lib/data.ts`** — edit in one place:
+
+- `siteConfig` — name, URLs, social links, location
+- `skills` — tech stack groups and items
+- `projects` — project cards (title, description, tags, links)
+- `experiences` — timeline entries
+- `roles` — typewriter cycling roles in hero
+
+## Project Structure
+
+```
+/app
+  /api/contact/route.ts     Contact form email endpoint (Resend)
+  layout.tsx                Root layout, fonts, theme provider
+  page.tsx                  Single-page composition
+  opengraph-image.tsx       Auto-generated OG image (edge runtime)
+  robots.ts / sitemap.ts    SEO files
+/components
+  /sections                 Hero, About, Skills, Projects, Experience, Contact, Footer
+  /shared                   Nav, ThemeProvider, ThemeToggle, SectionWrapper, SocialIcons
+  /ui                       shadcn/ui components
+/lib
+  data.ts                   All content — edit this file
+  utils.ts                  Tailwind merge utility
+/public
+  resume.pdf                Replace with your actual PDF
+```

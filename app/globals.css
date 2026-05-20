@@ -1,27 +1,161 @@
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+@layer base {
+  :root {
+    /* Dark — warm black + orange */
+    --background: 20 8% 5%;
+    --foreground: 30 12% 93%;
+    --card: 20 6% 8%;
+    --card-foreground: 30 12% 93%;
+    --popover: 20 6% 8%;
+    --popover-foreground: 30 12% 93%;
+    --primary: 24 95% 55%;
+    --primary-foreground: 20 8% 5%;
+    --secondary: 20 6% 12%;
+    --secondary-foreground: 30 12% 93%;
+    --muted: 20 6% 12%;
+    --muted-foreground: 20 5% 50%;
+    --accent: 20 6% 12%;
+    --accent-foreground: 24 95% 55%;
+    --destructive: 0 63% 51%;
+    --destructive-foreground: 30 12% 93%;
+    --border: 20 5% 15%;
+    --input: 20 5% 15%;
+    --ring: 24 95% 55%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 20 8% 5%;
+    --foreground: 30 12% 93%;
+    --card: 20 6% 8%;
+    --card-foreground: 30 12% 93%;
+    --popover: 20 6% 8%;
+    --popover-foreground: 30 12% 93%;
+    --primary: 24 95% 55%;
+    --primary-foreground: 20 8% 5%;
+    --secondary: 20 6% 12%;
+    --secondary-foreground: 30 12% 93%;
+    --muted: 20 6% 12%;
+    --muted-foreground: 20 5% 50%;
+    --accent: 20 6% 12%;
+    --accent-foreground: 24 95% 55%;
+    --destructive: 0 63% 51%;
+    --destructive-foreground: 30 12% 93%;
+    --border: 20 5% 15%;
+    --input: 20 5% 15%;
+    --ring: 24 95% 55%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  }
+
+  /* Lenis handles smooth scroll — disable native */
+  html {
+    scroll-behavior: auto;
+  }
+
+  ::selection {
+    background: rgba(249, 115, 22, 0.35);
+    color: rgba(255, 255, 255, 0.95);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(249, 115, 22, 0.35);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.6);
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 1.5px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Glass card — the core glassmorphism primitive */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(249, 115, 22, 0.28);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(249, 115, 22, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 45%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle dot grid texture overlay */
+.bg-grid {
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Background orb float animations */
+@keyframes orb-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(60px, -80px) scale(1.07); }
+  50%  { transform: translate(-40px, 40px) scale(0.95); }
+  75%  { transform: translate(30px, -30px) scale(1.03); }
+}
+
+@keyframes orb-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(-70px, 60px) scale(1.1); }
+  66%  { transform: translate(50px, -40px) scale(0.92); }
+}
+
+@keyframes orb-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(40px, 70px) scale(1.1); }
+}
+
+.orb-1 { animation: orb-float-1 22s ease-in-out infinite; }
+.orb-2 { animation: orb-float-2 28s ease-in-out infinite; }
+.orb-3 { animation: orb-float-3 18s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-1, .orb-2, .orb-3 { animation: none; }
 }
