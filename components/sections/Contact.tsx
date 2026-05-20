@@ -75,8 +75,7 @@ export function Contact() {
             title="Let's Build Something"
           />
           <p className="text-white/70 text-lg leading-relaxed mb-10 font-serif">
-            Have a project in mind, an interesting problem, or just want to talk shop
-            about event-driven architecture? My inbox is open.
+            Have a project in mind, lets collaborate, My inbox is open.
           </p>
 
           <div className="space-y-4">
